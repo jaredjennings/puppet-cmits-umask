@@ -17,5 +17,6 @@
 
 class umask::stig {
     include umask::stig::shell
-    include "umask::stig::${::osfamily}"
+    $lower_osfamily = downcase($::osfamily)
+    include "umask::stig::${lower_osfamily}"
 }
