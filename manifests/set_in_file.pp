@@ -30,7 +30,7 @@ define umask::set_in_file($umask) {
     $sed_i_umask = $::osfamily ? {
         'RedHat' => 'sed -i.before_umask',
         'Darwin' => 'sed -i .before_umask',
-        default  => unimplemented(),
+        default  => fail("unimplemented on ${::osfamily}"),
     }
     exec { "add umask ${umask} to ${name}":
         command => "echo 'umask ${umask}' >> ${name}",
