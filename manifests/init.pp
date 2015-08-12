@@ -23,3 +23,12 @@
 # important to set the umask in shells and process launchers of all
 # sorts to ensure that discretionary access controls act to provide
 # security.
+
+class umask($shell_processes, $user_processes, $system_processes) {
+    $lower_osfamily = downcase($::osfamily)
+    class { "${name}::${lower_osfamily}":
+        shell_processes => $shell_processes,
+        user_processes => $user_processes,
+        system_processes => $system_processes,
+    }
+}

@@ -13,22 +13,15 @@
 # % WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # % See the License for the specific language governing permissions and
 # % limitations under the License.
-# \subsection{STIG-required settings}
+class umask::redhat($shell_processes, $user_processes, $system_processes) {
+# The umask for system processes is taken care of by the init system
+# (\verb!/sbin/service! or \verb!systemd!). So we ignore
+# \verb!$system_processes!.
+#
+# Every user process on a Red Hat system is started from a shell at
+# some point, so we ignore \verb!$user_processes!.
 
-class umask::stig {
-    class { 'umask':
-
-# \implements{unixsrg}{GEN002560}%
-# Set the system default umask to \verb!077!, so that by default files
-# are only accessible by the user who created them.
-        shell_processes => '077',
-
-# \implements{mlionstig}{OSX8-00-01015}%
-# Set the default global umask setting for user applications to 027.
-        user_processes => '027',
-
-# \implements{mlionstig}{OSX8-00-01020}%
-# Set the default global umask setting for system processes to 022.
-        system_processes => '022',
+    class { 'umask::shell':
+        umask => $shell_processes,
     }
 }
