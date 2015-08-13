@@ -18,7 +18,7 @@ class umask::stig::darwin {
 # Set the default global umask setting for user applications to 027.
     file { '/etc/launchd-user.conf':
         ensure => present,
-        owner => root, group => 0, mode => 0644,
+        owner => root, group => 0, mode => '0644',
     }
     umask::set_in_file { '/etc/launchd-user.conf':
         umask => 027,
@@ -27,7 +27,7 @@ class umask::stig::darwin {
 # Set the default global umask setting for system processes to 022.
     file { '/etc/launchd.conf':
         ensure => present,
-        owner => root, group => 0, mode => 0644,
+        owner => root, group => 0, mode => '0644',
     }
     umask::set_in_file { '/etc/launchd.conf':
         umask => 022,

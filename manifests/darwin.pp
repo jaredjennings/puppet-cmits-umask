@@ -20,7 +20,7 @@ class umask::darwin($shell_processes, $user_processes, $system_processes) {
 
     file { '/etc/launchd-user.conf':
         ensure => present,
-        owner => root, group => 0, mode => 0644,
+        owner => root, group => 0, mode => '0644',
     }
     umask::set_in_file { '/etc/launchd-user.conf':
         umask => $user_processes,
@@ -28,7 +28,7 @@ class umask::darwin($shell_processes, $user_processes, $system_processes) {
 
     file { '/etc/launchd.conf':
         ensure => present,
-        owner => root, group => 0, mode => 0644,
+        owner => root, group => 0, mode => '0644',
     }
     umask::set_in_file { '/etc/launchd.conf':
         umask => $system_processes,
